@@ -1,0 +1,88 @@
+.toast {
+    z-index: 1000;
+    position: fixed;
+    width: 350px;
+    height: 80px;
+    background-color: #f4f4f4;
+    color: #111111;
+    border-radius: 10px;
+    padding: 10px 15px;
+    top: 20px;
+    right: 15px;
+    font-family: sans-serif;
+}
+
+.toast .title {
+    font-size: 16px;
+    padding: 0;
+    margin: 0;
+}
+
+.toast .text {
+    font-size: 13px;
+    margin-top: 5px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+}
+
+.toast .close {
+    position: absolute;
+    right: 15px;
+    top: 10px;
+    width: 20px;
+    height: 20px;
+    opacity: 0.3;
+    cursor: pointer;
+}
+
+.toast .close:hover {
+    opacity: 1;
+}
+
+.toast .close:before, .toast .close:after {
+    position: absolute;
+    left: 15px;
+    content: ' ';
+    height: 20px;
+    width: 2px;
+    background-color: #333;
+}
+
+.toast .close:before {
+    transform: rotate(45deg);
+}
+
+.toast .close:after {
+    transform: rotate(-45deg);
+}
+
+.fade-in {
+    animation-name: fade-in;
+    animation-duration: 2s;
+}
+
+.fade-out {
+    animation-name: fade-out;
+    animation-duration: 2s;
+}
+
+@keyframes fade-in {
+    from {
+        margin-top: -500px;
+    }
+
+    to {
+        margin-top: 0;
+    }
+}
+
+@keyframes fade-out {
+    from {
+        margin-top: 0;
+    }
+
+    to {
+        margin-top: -500px;
+    }
+}
