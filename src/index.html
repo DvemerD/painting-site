@@ -5,7 +5,6 @@
 	<meta name=viewport content="width=device-width, initial-scale=1">
     <title>Картины.art - портрет на холсте</title>
     <link rel=stylesheet href=assets/css/bootstrap.css>
-	<link rel="stylesheet" href="assets/css/toast.css">
     <link rel="stylesheet" href="assets/css/animate.css">
 	<link rel=stylesheet href=assets/css/main.css>
 </head>
@@ -204,7 +203,7 @@
 			<h2>Рассчитайте стоимость и получите скидку 30%</h2>
 			<div class=row>
 				<div class="col-md-4 col-offset-1">
-					<form class="form calc-form" data-calc action=# method=POST enctype=multipart/form-data>
+					<form class="form calc_form" data-calc action=# method=POST enctype=multipart/form-data>
 						<h4>Загрузите свое фото</h4>
 						<div class=file_upload>
 							<button type=button>Загрузить фотографию</button>
@@ -220,19 +219,19 @@
 						</select>
 						<select id=material>
 							<option value>Выберите материал картины</option>
-							<option value="1" title="Изящный, позволяет легко создавать текстуру, подходит для декоративных картин маслом.">Холст из волокна</option>
-							<option value="1.2" title="Достаточно грубый и создает ощущение реальности, подходит для классических пейзажей, натюрмортов и портретов.">Льняной холст</option>
+							<option value="1"  title="Изящный, позволяет легко создавать текстуру, подходит для декоративных картин маслом.">Холст из волокна</option>
+							<option value="1.2"  title="Достаточно грубый и создает ощущение реальности, подходит для классических пейзажей, натюрмортов и портретов.">Льняной холст</option>
 							<option value="1.5" title="Изящный, подходит для всех типов реалистичных портретов.">Холст из натурального хлопка</option>
 						</select>
 						<select id=options>
 							<option value="0">Дополнительные услуги</option>
 							<option value="1000">Покрытие арт-гелем</option>
 							<option value="2000">Экспресс-изготовление</option>
-							<option value="500">Доставка готовых работ </option>
+							<option value="500">Доставка готовых работ</option>
 						</select>
 						<input type="text" class="promocode" placeholder="Введите ваш промокод">
-						<div class=calc-price>Для расчета нужно выбрать размер картины и материал картины</div>
-						<button class="button button-order">Быстрый заказ</button>
+						<div class="calc-price">Для расчета нужно выбрать размер картины и материал картины</div>
+						<button class="button button-order" id="btn-calc">Быстрый заказ</button>
 					</form>
 				</div>
 				<div class="col-md-4 col-md-offset-2 hidden-sm hidden-xs">
@@ -470,7 +469,7 @@
 			<div class=feedback-slider style="position:relative; height: 400px;">
 				<button class="main-slider-btn main-prev-btn">
 					<img src="assets/img/left-arr.png" alt="left">
-				</button>
+				</button>'
 				<button class="main-slider-btn main-next-btn">
 					<img src="assets/img/right-arr.png" alt="right">
 				</button>

@@ -1,10 +1,10 @@
-import { postData } from "../services/requests";
+import { postData } from '../services/requests';
 
-const forms = () => {
-    const forms = document.querySelectorAll('form'),
-          inputs = document.querySelectorAll('input'),
-          upload = document.querySelectorAll('[name="upload"]');
-    
+const forms = (state) => {
+    const form = document.querySelectorAll('form'),
+        inputs = document.querySelectorAll('input'),
+        upload = document.querySelectorAll('[name="upload"]');
+
     const message = {
         loading: 'Загрузка...',
         success: 'Спасибо! Скоро мы с вами свяжемся',
@@ -17,7 +17,7 @@ const forms = () => {
     const path = {
         designer: 'assets/server.php',
         question: 'assets/question.php'
-    }
+    };
 
     const clearInputs = () => {
         inputs.forEach(item => {
@@ -30,19 +30,21 @@ const forms = () => {
 
     upload.forEach(item => {
         item.addEventListener('input', () => {
+            console.log(item.files[0]);
             let dots;
             const arr = item.files[0].name.split('.');
+
             arr[0].length > 6 ? dots = "..." : dots = '.';
             const name = arr[0].substring(0, 6) + dots + arr[1];
             item.previousElementSibling.textContent = name;
         });
     });
 
-    forms.forEach(item => {
+    form.forEach(item => {
         item.addEventListener('submit', (e) => {
             e.preventDefault();
 
-            let statusMessage = document.createElement('div');    
+            let statusMessage = document.createElement('div');
             statusMessage.classList.add('status');
             item.parentNode.appendChild(statusMessage);
 
@@ -61,14 +63,22 @@ const forms = () => {
             statusMessage.appendChild(textMessage);
 
             const formData = new FormData(item);
+
+            if (item.hasAttribute('data-calc')) {
+                for (let key in state) {
+                    formData.append(key, state[key]);
+                }
+                for (var pair of formData.entries()) {
+                    console.log(pair[0]+ ', ' + pair[1]); 
+                }
+            }
             
-            
-            let api;
-            item.closest('.popup-design') || item.classList.contains('calc-form') ? api = path.designer : api = path.question;
-            
+            let api = path.question;
+            // item.closest('.popup-design') || item.classList.contains('calc_form') ? api = path.designer : api = path.question;
+
             postData(api, formData)
                 .then(res => {
-                    console.dir(res);
+                    console.log(res);
                     statusImg.setAttribute('src', message.ok);
                     textMessage.textContent = message.success;
                 })
@@ -83,7 +93,7 @@ const forms = () => {
                         item.style.display = 'block';
                         item.classList.remove('fadeOutUp');
                         item.classList.add('fadeInUp');
-                    }, 5000);  
+                    }, 5000);
                 });
         });
     });
