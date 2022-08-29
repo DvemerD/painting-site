@@ -4856,38 +4856,6 @@ var forms = function forms(state) {
   inputMin.addEventListener('drop', function (e) {
     item.addEventListener('submit', function (e) {
       e.preventDefault();
-      var statusMessage = document.createElement('div');
-      statusMessage.classList.add('status');
-      item.parentNode.appendChild(statusMessage);
-      var formData = new FormData(item);
-
-      if (item.hasAttribute('data-calc')) {
-        for (var key in state) {
-          formData.append(key, state[key]);
-        } // for (var pair of formData.entries()) {
-        //     console.log(pair[0]+ ', ' + pair[1]); 
-        // }
-
-      }
-
-      var api = path.question; // item.closest('.popup-design') || item.classList.contains('calc_form') ? api = path.designer : api = path.question;
-
-      Object(_services_requests__WEBPACK_IMPORTED_MODULE_6__["postData"])(api, formData).then(function (res) {
-        // console.log(res);
-        statusImg.setAttribute('src', message.ok);
-        textMessage.textContent = message.success;
-      }).catch(function () {
-        statusImg.setAttribute('src', message.fail);
-        textMessage.textContent = message.failure;
-      }).finally(function () {
-        clearInputs();
-        setTimeout(function () {
-          statusMessage.remove();
-          item.style.display = 'block';
-          item.classList.remove('fadeOutUp');
-          item.classList.add('fadeInUp');
-        }, 5000);
-      });
     });
   });
   form.forEach(function (item) {
