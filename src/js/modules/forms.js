@@ -3,7 +3,8 @@ import { postData } from '../services/requests';
 const forms = (state) => {
     const form = document.querySelectorAll('form'),
         inputs = document.querySelectorAll('input'),
-        upload = document.querySelectorAll('[name="upload"]');
+        upload = document.querySelectorAll('[name="upload"]'),
+        inputMin = document.querySelector('#input-min');        
 
     const message = {
         loading: 'Загрузка...',
@@ -40,6 +41,13 @@ const forms = (state) => {
         });
     });
 
+    inputMin.addEventListener('drop', (e) => {
+        item.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+        });
+    });
+
     form.forEach(item => {
         item.addEventListener('submit', (e) => {
             e.preventDefault();
@@ -68,9 +76,9 @@ const forms = (state) => {
                 for (let key in state) {
                     formData.append(key, state[key]);
                 }
-                for (var pair of formData.entries()) {
-                    console.log(pair[0]+ ', ' + pair[1]); 
-                }
+                // for (var pair of formData.entries()) {
+                //     console.log(pair[0]+ ', ' + pair[1]); 
+                // }
             }
             
             let api = path.question;
@@ -78,7 +86,7 @@ const forms = (state) => {
 
             postData(api, formData)
                 .then(res => {
-                    console.log(res);
+                    // console.log(res);
                     statusImg.setAttribute('src', message.ok);
                     textMessage.textContent = message.success;
                 })
