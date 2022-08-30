@@ -43,8 +43,7 @@ const forms = (state) => {
 
     inputMin.addEventListener('drop', (e) => {
         item.addEventListener('submit', (e) => {
-            e.preventDefault();
-            
+            e.preventDefault(); 
         });
     });
 
