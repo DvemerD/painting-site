@@ -543,29 +543,6 @@ module.exports = function (target, source) {
 
 /***/ }),
 
-/***/ "./node_modules/core-js/internals/create-html.js":
-/*!*******************************************************!*\
-  !*** ./node_modules/core-js/internals/create-html.js ***!
-  \*******************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-var requireObjectCoercible = __webpack_require__(/*! ../internals/require-object-coercible */ "./node_modules/core-js/internals/require-object-coercible.js");
-
-var quot = /"/g;
-
-// B.2.3.2.1 CreateHTML(string, tag, attribute, value)
-// https://tc39.github.io/ecma262/#sec-createhtml
-module.exports = function (string, tag, attribute, value) {
-  var S = String(requireObjectCoercible(string));
-  var p1 = '<' + tag;
-  if (attribute !== '') p1 += ' ' + attribute + '="' + String(value).replace(quot, '&quot;') + '"';
-  return p1 + '>' + S + '</' + tag + '>';
-};
-
-
-/***/ }),
-
 /***/ "./node_modules/core-js/internals/create-non-enumerable-property.js":
 /*!**************************************************************************!*\
   !*** ./node_modules/core-js/internals/create-non-enumerable-property.js ***!
@@ -923,27 +900,6 @@ module.exports = function (KEY, length, exec, sham) {
     );
     if (sham) createNonEnumerableProperty(RegExp.prototype[SYMBOL], 'sham', true);
   }
-};
-
-
-/***/ }),
-
-/***/ "./node_modules/core-js/internals/forced-string-html-method.js":
-/*!*********************************************************************!*\
-  !*** ./node_modules/core-js/internals/forced-string-html-method.js ***!
-  \*********************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-var fails = __webpack_require__(/*! ../internals/fails */ "./node_modules/core-js/internals/fails.js");
-
-// check the existence of a method, lowercase
-// of a tag and escaping quotes in arguments
-module.exports = function (METHOD_NAME) {
-  return fails(function () {
-    var test = ''[METHOD_NAME]('"');
-    return test !== test.toLowerCase() || test.split('"').length > 3;
-  });
 };
 
 
@@ -3233,30 +3189,6 @@ $({ target: PROMISE, stat: true, forced: INCORRECT_ITERATION }, {
 
 /***/ }),
 
-/***/ "./node_modules/core-js/modules/es.string.link.js":
-/*!********************************************************!*\
-  !*** ./node_modules/core-js/modules/es.string.link.js ***!
-  \********************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var $ = __webpack_require__(/*! ../internals/export */ "./node_modules/core-js/internals/export.js");
-var createHTML = __webpack_require__(/*! ../internals/create-html */ "./node_modules/core-js/internals/create-html.js");
-var forcedStringHTMLMethod = __webpack_require__(/*! ../internals/forced-string-html-method */ "./node_modules/core-js/internals/forced-string-html-method.js");
-
-// `String.prototype.link` method
-// https://tc39.github.io/ecma262/#sec-string.prototype.link
-$({ target: 'String', proto: true, forced: forcedStringHTMLMethod('link') }, {
-  link: function link(url) {
-    return createHTML(this, 'a', 'href', url);
-  }
-});
-
-
-/***/ }),
-
 /***/ "./node_modules/core-js/modules/es.string.match.js":
 /*!*********************************************************!*\
   !*** ./node_modules/core-js/modules/es.string.match.js ***!
@@ -4438,7 +4370,7 @@ window.addEventListener('DOMContentLoaded', function () {
   Object(_modules_mask__WEBPACK_IMPORTED_MODULE_3__["default"])('[name="phone"]');
   Object(_modules_checkTextInputs__WEBPACK_IMPORTED_MODULE_4__["default"])('[name="name"]');
   Object(_modules_checkTextInputs__WEBPACK_IMPORTED_MODULE_4__["default"])('[name="message"]');
-  Object(_modules_showMoreStyles__WEBPACK_IMPORTED_MODULE_5__["default"])('.button-styles', '#styles .row');
+  Object(_modules_showMoreStyles__WEBPACK_IMPORTED_MODULE_5__["default"])('.button-styles', '.styles-2');
   Object(_modules_calc__WEBPACK_IMPORTED_MODULE_6__["default"])('#size', '#material', '#options', '.promocode', '.calc-price', '.calc_form', state);
   Object(_modules_filter__WEBPACK_IMPORTED_MODULE_7__["default"])();
   Object(_modules_pictureSize__WEBPACK_IMPORTED_MODULE_8__["default"])('.sizes-block');
@@ -5253,48 +5185,58 @@ var scrolling = function scrolling(upSelector) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var core_js_modules_es_array_concat__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.array.concat */ "./node_modules/core-js/modules/es.array.concat.js");
-/* harmony import */ var core_js_modules_es_array_concat__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_concat__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var core_js_modules_es_string_link__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es.string.link */ "./node_modules/core-js/modules/es.string.link.js");
-/* harmony import */ var core_js_modules_es_string_link__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_link__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
-/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _services_requests__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../services/requests */ "./src/js/services/requests.js");
-/* harmony import */ var _toast__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./toast */ "./src/js/modules/toast.js");
+/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
+/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_0__);
 
 
-
-
-
-
-var showMoreStyles = function showMoreStyles(trigger, wrapper) {
-  var btn = document.querySelector(trigger);
-  btn.addEventListener('click', function () {
-    Object(_services_requests__WEBPACK_IMPORTED_MODULE_3__["getResourse"])('http://localhost:3000/style').then(function (res) {
-      return createCards(res);
-    }).catch(function (error) {
-      console.dir(error);
-      new _toast__WEBPACK_IMPORTED_MODULE_4__["default"]({
-        title: "Error",
-        text: error.message,
-        theme: "light",
-        autohide: false
-      });
-    });
-    this.remove();
+// import { getResourse } from "../services/requests";
+// import Toast from "./toast";
+// const showMoreStyles = (trigger, wrapper) => {
+//     const btn = document.querySelector(trigger);
+//     btn.addEventListener('click', function () {
+//         getResourse('http://localhost:3000/style')
+//             .then(res => createCards(res))
+//             .catch(error => {
+//                 console.dir(error);
+//                 new Toast({
+//                     title: "Error",
+//                     text: error.message,
+//                     theme: "light",
+//                     autohide: false
+//                 });
+//             });
+//         this.remove();
+//     });
+//     function createCards(response) {
+//         response.forEach(({ src, title, link }) => {
+//             let card = document.createElement('div');
+//             card.classList.add('animated', 'fadeInUp', 'col-sm-3', 'col-sm-offset-0', 'col-xs-10', 'col-xs-offset-1');
+//             card.innerHTML = `
+//                 <div class="styles-block">
+//                     <img src=${src} alt="style">
+//                     <h4>${title}</h4>
+//                     <a href=${link}>Подробнее</a>
+//                 </div>  
+//             `;
+//             document.querySelector(wrapper).appendChild(card);
+//         });
+//     }
+// };
+// export default showMoreStyles;
+var showMoreStyles = function showMoreStyles(trigger, styles) {
+  var cards = document.querySelectorAll(styles),
+      btn = document.querySelector(trigger);
+  cards.forEach(function (card) {
+    card.classList.add('animated', 'fadeInUp');
   });
+  btn.addEventListener('click', function () {
+    cards.forEach(function (card) {
+      card.classList.remove('hidden-lg', 'hidden-md', 'hidden-sm', 'hidden-xs');
+      card.classList.add('col-sm-3', 'col-sm-offset-0', 'col-xs-10', 'col-xs-offset-1');
+    }); // btn.style.display = 'none';
 
-  function createCards(response) {
-    response.forEach(function (_ref) {
-      var src = _ref.src,
-          title = _ref.title,
-          link = _ref.link;
-      var card = document.createElement('div');
-      card.classList.add('animated', 'fadeInUp', 'col-sm-3', 'col-sm-offset-0', 'col-xs-10', 'col-xs-offset-1');
-      card.innerHTML = "\n                <div class=\"styles-block\">\n                    <img src=".concat(src, " alt=\"style\">\n                    <h4>").concat(title, "</h4>\n                    <a href=").concat(link, ">\u041F\u043E\u0434\u0440\u043E\u0431\u043D\u0435\u0435</a>\n                </div>  \n            ");
-      document.querySelector(wrapper).appendChild(card);
-    });
-  }
+    btn.remove();
+  });
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (showMoreStyles);
@@ -5381,110 +5323,6 @@ var sliders = function sliders(slides, dir, prev, next) {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (sliders);
-
-/***/ }),
-
-/***/ "./src/js/modules/toast.js":
-/*!*********************************!*\
-  !*** ./src/js/modules/toast.js ***!
-  \*********************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Toast; });
-/* harmony import */ var core_js_modules_es_array_concat__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.array.concat */ "./node_modules/core-js/modules/es.array.concat.js");
-/* harmony import */ var core_js_modules_es_array_concat__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_concat__WEBPACK_IMPORTED_MODULE_0__);
-
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-var Toast =
-/*#__PURE__*/
-function () {
-  function Toast(_ref) {
-    var _this = this;
-
-    var title = _ref.title,
-        text = _ref.text,
-        theme = _ref.theme,
-        autohide = _ref.autohide,
-        interval = _ref.interval;
-
-    _classCallCheck(this, Toast);
-
-    this.title = title ? title : '';
-    this.text = text + text;
-    this.theme = theme;
-    this.autohide = autohide;
-    this.interval = interval;
-    this.render();
-    document.querySelector('.close').addEventListener('click', function () {
-      _this.close('.toast');
-    });
-    this.hideAuto();
-    this.darkMode();
-  }
-
-  _createClass(Toast, [{
-    key: "hideAuto",
-    value: function hideAuto() {
-      var _this2 = this;
-
-      if (this.autohide) {
-        setTimeout(function () {
-          _this2.close('.toast');
-        }, this.interval);
-      }
-    }
-  }, {
-    key: "close",
-    value: function close(parent) {
-      var parentNode = document.querySelector(parent);
-      parentNode.classList.remove('fade-in');
-      parentNode.classList.add('fade-out');
-      setTimeout(function () {
-        parentNode.remove();
-      }, 2000);
-    }
-  }, {
-    key: "darkMode",
-    value: function darkMode() {
-      var wrapper = document.querySelector('.toast');
-
-      switch (this.theme) {
-        case 'light':
-          wrapper.style.backgroundColor = '#f4f4f4';
-          wrapper.style.color = '#111111';
-          break;
-
-        case 'dark':
-          wrapper.style.backgroundColor = '#111111';
-          wrapper.style.color = '#f4f4f4';
-          break;
-
-        default:
-          wrapper.style.backgroundColor = '#f4f4f4';
-          wrapper.style.color = '#111111';
-      }
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      document.body.insertAdjacentHTML('afterBegin', "\n            <div class=\"toast fade-in\">\n                <h3 class=\"title\">".concat(this.title, "</h3> \n                <p class=\"text\">").concat(this.text.length > 109 ? this.text.substr(0, 105) + '...' : this.text, "</p>  \n                <div class=\"close\"></div>\n            </div>\n        "));
-      console.log(document.querySelector('.text').textContent.length);
-    }
-  }]);
-
-  return Toast;
-}();
-
-
 
 /***/ }),
 
